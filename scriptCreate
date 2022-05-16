@@ -1,0 +1,25 @@
+#!/bin/bash
+read -p " Choose the function Read or delete (R/D) " fun
+read -p " Import Name " name
+a=`grep -w $name /home/User1/Desktop/file.txt`
+touch /home/User1/Desktop/file.txt
+case $fun in 
+	R | r) if [[ $name != $a ]]
+	then
+		echo $name>>/home/User1/Desktop/file.txt
+		echo "Your file saved"
+	else
+		echo "$name already exists in the list"
+
+	fi;;
+	D | d) x=`sed -i "/$name/d" "/home/User1/Desktop/file.txt"`
+		if [[ $name = $a ]]
+		then
+			echo $x
+			echo "Your file deleted"
+		else
+			echo "$name doesn't exist in the list"
+		fi;;
+	*)
+		echo "There is a choice only between (R/D)"
+esac
